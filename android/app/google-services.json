@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "679166549961",
+    "firebase_url": "https://ziel-c3662.firebaseio.com",
+    "project_id": "ziel-c3662",
+    "storage_bucket": "ziel-c3662.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:679166549961:android:592c897326a5cf1297d218",
+        "android_client_info": {
+          "package_name": "com.wig170047.zielfyp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "679166549961-qv6jp7hfh4e81pb3eani5h9l2gm3gfj3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wig170047.zielfyp",
+            "certificate_hash": "a8780a89d37be046faf3e074c7cb4067150ab58e"
+          }
+        },
+        {
+          "client_id": "679166549961-j952970ei9jnqee1kd9uoe0kticc03bk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCxIqvMnYmC_c0_oqdxnM7pteo5h_o11s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "679166549961-j952970ei9jnqee1kd9uoe0kticc03bk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
