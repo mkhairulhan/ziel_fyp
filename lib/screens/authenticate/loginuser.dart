@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:zielfyp/services/auth.dart';
+import 'package:zielfyp/shared/loading.dart';
 
 class LoginUser extends StatefulWidget {
 
@@ -17,6 +18,7 @@ class _LoginUserState extends State<LoginUser> {
 
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   //text field state
   String email = '';
@@ -25,7 +27,7 @@ class _LoginUserState extends State<LoginUser> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
+    return loading ? Loading() : Form(
       key: _formKey,
       child: Column(
         children: <Widget>[
@@ -63,7 +65,6 @@ class _LoginUserState extends State<LoginUser> {
                       },
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.only(left: 20, top: 15, right: 15, bottom: 15),
-//                    contentPadding: EdgeInsets.symmetric(vertical: 15),
                         enabledBorder: new OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(50),
                           borderSide: BorderSide(
@@ -109,9 +110,13 @@ class _LoginUserState extends State<LoginUser> {
                   ),
                   onPressed: () async{
                     if(_formKey.currentState.validate()){
+                      setState(() => loading = true);
                       dynamic result = await _auth.signInWithEmailAndPassword(email, password);
                       if(result == null){
-                        setState(() => error = 'Error Signing In');
+                        setState(() {
+                          error = 'Error Signing In';
+                          loading = false;
+                        });
                       }
                     }
                   },

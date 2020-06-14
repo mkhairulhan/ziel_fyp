@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:zielfyp/services/auth.dart';
+import 'package:zielfyp/shared/loading.dart';
 
 class RegisterUser extends StatefulWidget {
 
@@ -17,6 +18,7 @@ class _RegisterUserState extends State<RegisterUser> {
 
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   //text field state
   String email = '';
@@ -25,7 +27,7 @@ class _RegisterUserState extends State<RegisterUser> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
+    return loading ? Loading() :Form(
       key: _formKey,
       child: Column(
         children: <Widget>[
@@ -109,9 +111,13 @@ class _RegisterUserState extends State<RegisterUser> {
                   ),
                   onPressed: () async{
                     if(_formKey.currentState.validate()){
+                      setState(() => loading = true);
                       dynamic result = await _auth.registerWithEmailAndPassword(email, password);
                       if(result == null){
-                        setState(() => error = 'Please supply a valid credentials.');
+                        setState(() {
+                          error = 'Please Supply A Valid Credentials';
+                          loading = false;
+                        });
                       }
                     }
                   },
