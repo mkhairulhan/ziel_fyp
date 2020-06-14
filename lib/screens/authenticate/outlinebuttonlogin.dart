@@ -18,9 +18,9 @@ class _OutlineBtnState extends State<OutlineBtn> {
           color: Color(0xFF222431),
           width: 2,
         ),
-        borderRadius: BorderRadius.circular(50),
+        borderRadius: BorderRadius.circular(40),
       ),
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.all(13),
       child: Center(
         child: Text(
           widget.btnText,

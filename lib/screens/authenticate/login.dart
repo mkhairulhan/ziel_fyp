@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:keyboard_visibility/keyboard_visibility.dart';
 import 'package:zielfyp/screens/authenticate/inputwithicon.dart';
 import 'package:zielfyp/screens/authenticate/outlinebuttonlogin.dart';
-import 'package:zielfyp/screens/authenticate/primarybuttonlogin.dart';
-import 'package:zielfyp/services/auth.dart';
+import 'package:zielfyp/screens/authenticate/registeruser.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -12,8 +11,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
-  final AuthService _auth = AuthService();
 
   int _pageState = 0;
 
@@ -237,32 +234,23 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   InputWithIcon(
-                    icon: Icons.email,
-                    hint: "Enter Email",
-                  ),
-                  SizedBox(height: 20,),
-                  InputWithIcon(
-                    icon: Icons.vpn_key,
-                    hint: "Password",
+                    btnText: "Login",
                   ),
                 ],
               ),
               Column(
                 children: <Widget>[
-                  PrimaryButton(
-                    btnText: "Login",
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  GestureDetector(
-                    onTap: (){
-                      setState(() {
-                        _pageState = 2;
-                      });
-                    },
-                    child: OutlineBtn(
-                      btnText: "Create New Account",
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 50,),
+                    child: GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          _pageState = 2;
+                        });
+                      },
+                      child: OutlineBtn(
+                        btnText: "Create New Account",
+                      ),
                     ),
                   ),
                 ],
@@ -270,7 +258,7 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
         ),
-        AnimatedContainer(
+        AnimatedContainer(//
           height: _registerHeight,
           padding: EdgeInsets.all(32),
           curve: Curves.fastLinearToSlowEaseIn,
@@ -285,9 +273,9 @@ class _LoginPageState extends State<LoginPage> {
               topRight: Radius.circular(30),
             ),
           ),
-          child: Column(
+          child: Column(//
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
+            children: <Widget>[//
               Column(
                 children: <Widget>[
                   Container(
@@ -299,33 +287,26 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                  InputWithIcon(
-                    icon: Icons.email,
-                    hint: "Enter Email",
-                  ),
-                  SizedBox(height: 20,),
-                  InputWithIcon(
-                    icon: Icons.vpn_key,
-                    hint: "Password",
+                  RegisterUser(//
+                    btnText: "Create Account",
                   ),
                 ],
               ),
-              Column(
-                children: <Widget>[
-                  PrimaryButton(
-                    btnText: "Create Account",
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  GestureDetector(
-                    onTap: (){
-                      setState(() {
-                        _pageState = 1;
-                      });
-                    },
-                    child: OutlineBtn(
-                      btnText: "Login",
+              Column(//
+                children: <Widget>[//
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 50,
+                    ),
+                    child: GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          _pageState = 1;
+                        });
+                      },
+                      child: OutlineBtn(
+                        btnText: "Login",
+                      ),
                     ),
                   ),
                 ],

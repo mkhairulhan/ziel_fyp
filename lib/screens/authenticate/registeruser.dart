@@ -2,18 +2,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:zielfyp/services/auth.dart';
 
-class InputWithIcon extends StatefulWidget {
+class RegisterUser extends StatefulWidget {
 
   final IconData icon;
   final String hint;
   final String btnText;
-  InputWithIcon({this.icon, this.hint, this.btnText});
+  RegisterUser({this.icon, this.hint, this.btnText});
 
   @override
-  _InputWithIconState createState() => _InputWithIconState();
+  _RegisterUserState createState() => _RegisterUserState();
 }
 
-class _InputWithIconState extends State<InputWithIcon> {
+class _RegisterUserState extends State<RegisterUser> {
 
   final AuthService _auth = AuthService();
 
@@ -122,7 +122,3 @@ class _InputWithIconState extends State<InputWithIcon> {
     );
   }
 }
-
-
-
-
