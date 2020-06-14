@@ -16,14 +16,17 @@ class RegisterUser extends StatefulWidget {
 class _RegisterUserState extends State<RegisterUser> {
 
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
 
   //text field state
   String email = '';
   String password = '';
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formKey,
       child: Column(
         children: <Widget>[
           Row(
@@ -54,6 +57,7 @@ class _RegisterUserState extends State<RegisterUser> {
                 child: Column(
                   children: <Widget>[
                     TextFormField(
+                      validator: (val) => val.isEmpty ? 'Enter an email' : null,
                       onChanged: (val){
                         setState(() => email = val);
                       },
@@ -73,6 +77,7 @@ class _RegisterUserState extends State<RegisterUser> {
                     SizedBox(height: 20,),
                     TextFormField(
                       obscureText: true,
+                      validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
                       onChanged: (val){
                         setState(() => password = val);
                       },
@@ -93,28 +98,41 @@ class _RegisterUserState extends State<RegisterUser> {
               ),
             ],
           ),
-          SizedBox(height: 100,),
+          SizedBox(height: 20,),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 50,),
-            child: RaisedButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              onPressed: () async{
-                print(email);
-                print(password);
-              },
-              color: Color(0xFF222431),
-              padding: EdgeInsets.all(15),
-              child: Center(
-                child: Text(
-                  widget.btnText,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
+            child: Column(
+              children: <Widget>[
+                RaisedButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  onPressed: () async{
+                    if(_formKey.currentState.validate()){
+                      dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+                      if(result == null){
+                        setState(() => error = 'Please supply a valid credentials.');
+                      }
+                    }
+                  },
+                  color: Color(0xFF222431),
+                  padding: EdgeInsets.all(15),
+                  child: Center(
+                    child: Text(
+                      widget.btnText,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                SizedBox(height: 20,),
+                Text(
+                  error,
+                  style: TextStyle(color: Colors.red, fontSize: 14),
+                ),
+              ],
             ),
           ),
         ],

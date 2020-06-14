@@ -2,28 +2,31 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:zielfyp/services/auth.dart';
 
-class InputWithIcon extends StatefulWidget {
+class LoginUser extends StatefulWidget {
 
   final IconData icon;
   final String hint;
   final String btnText;
-  InputWithIcon({this.icon, this.hint, this.btnText});
+  LoginUser({this.icon, this.hint, this.btnText});
 
   @override
-  _InputWithIconState createState() => _InputWithIconState();
+  _LoginUserState createState() => _LoginUserState();
 }
 
-class _InputWithIconState extends State<InputWithIcon> {
+class _LoginUserState extends State<LoginUser> {
 
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
 
   //text field state
   String email = '';
   String password = '';
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formKey,
       child: Column(
         children: <Widget>[
           Row(
@@ -54,6 +57,7 @@ class _InputWithIconState extends State<InputWithIcon> {
                 child: Column(
                   children: <Widget>[
                     TextFormField(
+                      validator: (val) => val.isEmpty ? 'Enter a registered email' : null,
                       onChanged: (val){
                         setState(() => email = val);
                       },
@@ -73,6 +77,7 @@ class _InputWithIconState extends State<InputWithIcon> {
                     SizedBox(height: 20,),
                     TextFormField(
                       obscureText: true,
+                      validator: (val) => val.length < 6 ? 'Enter a valid password' : null,
                       onChanged: (val){
                         setState(() => password = val);
                       },
@@ -93,28 +98,41 @@ class _InputWithIconState extends State<InputWithIcon> {
               ),
             ],
           ),
-          SizedBox(height: 100,),
+          SizedBox(height: 20,),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 50,),
-            child: RaisedButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              onPressed: () async{
-                print(email);
-                print(password);
-              },
-              color: Color(0xFF222431),
-              padding: EdgeInsets.all(15),
-              child: Center(
-                child: Text(
-                  widget.btnText,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
+            child: Column(
+              children: <Widget>[
+                RaisedButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  onPressed: () async{
+                    if(_formKey.currentState.validate()){
+                      dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                      if(result == null){
+                        setState(() => error = 'Error Signing In');
+                      }
+                    }
+                  },
+                  color: Color(0xFF222431),
+                  padding: EdgeInsets.all(15),
+                  child: Center(
+                    child: Text(
+                      widget.btnText,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                SizedBox(height: 20,),
+                Text(
+                  error,
+                  style: TextStyle(color: Colors.red, fontSize: 14),
+                ),
+              ],
             ),
           ),
         ],

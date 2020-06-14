@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:keyboard_visibility/keyboard_visibility.dart';
-import 'package:zielfyp/screens/authenticate/inputwithicon.dart';
-import 'package:zielfyp/screens/authenticate/outlinebuttonlogin.dart';
+import 'package:zielfyp/screens/authenticate/loginuser.dart';
+import 'package:zielfyp/screens/authenticate/loginSignupRouteButton.dart';
 import 'package:zielfyp/screens/authenticate/registeruser.dart';
 
 class LoginPage extends StatefulWidget {
@@ -233,7 +233,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                  InputWithIcon(
+                  LoginUser(
                     btnText: "Login",
                   ),
                 ],
@@ -248,7 +248,7 @@ class _LoginPageState extends State<LoginPage> {
                           _pageState = 2;
                         });
                       },
-                      child: OutlineBtn(
+                      child: RouteOutlineBtnLgSu(
                         btnText: "Create New Account",
                       ),
                     ),
@@ -304,7 +304,7 @@ class _LoginPageState extends State<LoginPage> {
                           _pageState = 1;
                         });
                       },
-                      child: OutlineBtn(
+                      child: RouteOutlineBtnLgSu(
                         btnText: "Login",
                       ),
                     ),

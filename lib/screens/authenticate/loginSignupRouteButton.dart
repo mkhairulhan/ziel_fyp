@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 
-class OutlineBtn extends StatefulWidget {
+class RouteOutlineBtnLgSu extends StatefulWidget {
 
   final String btnText;
-  OutlineBtn({this.btnText});
+  RouteOutlineBtnLgSu({this.btnText});
 
   @override
-  _OutlineBtnState createState() => _OutlineBtnState();
+  _RouteOutlineBtnLgSuState createState() => _RouteOutlineBtnLgSuState();
 }
 
-class _OutlineBtnState extends State<OutlineBtn> {
+class _RouteOutlineBtnLgSuState extends State<RouteOutlineBtnLgSu> {
   @override
   Widget build(BuildContext context) {
     return Container(
